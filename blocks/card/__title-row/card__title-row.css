@@ -1,0 +1,7 @@
+.card__title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
+  height: 23px;
+  margin: 25px auto 31px auto;
+}

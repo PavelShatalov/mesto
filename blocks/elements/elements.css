@@ -1,0 +1,6 @@
+.elements {
+  justify-content: center;
+  display: grid;
+  gap: 20px 17px;
+  grid-template: repeat(auto-fill, 361px)/repeat(auto-fill, 282px);
+}

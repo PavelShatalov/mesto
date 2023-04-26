@@ -1,0 +1,12 @@
+.Profile-Info__title-row {
+ display: flex;
+ gap: 18px;
+}
+
+@media screen and (max-width: 767px) {
+  .Profile-Info__title-row {
+    gap: 10px;
+    align-items: center;
+   }
+
+}
