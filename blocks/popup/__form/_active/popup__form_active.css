@@ -1,4 +1,4 @@
-.popup_active { /* При добавлении класса 'active'*/
+.popup__form_active { /* При добавлении класса 'active'*/
   transform: translate(-50%, -50%) scale(1); /* Так же центрируем и плавно увеличиваем*/
   transition: 0.5s all;
 }

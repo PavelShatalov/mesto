@@ -1,6 +1,6 @@
 // Объявляем переменные, выбирая соответствующие элементы из DOM
 let popupBg = document.querySelector('.popup__bg'); // Фон попап окна
-let popup = document.querySelector('.popup'); // Само окно
+let popup = document.querySelector('.popup__form'); // Само окно
 let openPopupButtons = document.querySelectorAll('.open-popup'); // Кнопки для показа окна
 let closePopupButton = document.querySelector('.popup__close'); // Кнопка для закрытия окна
 let sendPopupButton = document.querySelector('.popup__submit-send'); // Кнопка для отправки данных из попапа
@@ -8,13 +8,13 @@ let sendPopupButton = document.querySelector('.popup__submit-send'); // Кноп
 // Функция для открытия попапа
 function openPopup() {
 popupBg.classList.add('popup__bg_active'); // Добавляем класс 'active' для фона
-popup.classList.add('popup_active'); // И для самого окна
+popup.classList.add('popup__form_active'); // И для самого окна
 }
 
 // Функция для закрытия попапа
 function closePopup() {
 popupBg.classList.remove('popup__bg_active'); // Убираем активный класс с фона
-popup.classList.remove('popup_active'); // И с окна
+popup.classList.remove('popup__form_active'); // И с окна
 }
 
 // Функция для отправки данных из попапа и обновления профиля на странице
