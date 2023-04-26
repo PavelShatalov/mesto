@@ -1,12 +1,12 @@
 .card__button-like {
-  Width: 22px;
-  Height: 19px;
+  width: 22px;
+  height: 19px;
   background-image: url(../../../images/like-Button.svg);
   background-size: contain;
   background-color: white;
   border: 1px solid #fff;
   padding: 0;
-  margin: 0 15px 0 auto ;
+  margin: 0 15px 0 auto;
 }
 .card__button-like:hover {
   opacity: 0.5;
