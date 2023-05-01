@@ -13,6 +13,10 @@
   cursor: pointer;
 }
 
+.card__button-like:active{
+  background-image: url(../../../images/like-Button_active.svg);
+}
+
 
 
 

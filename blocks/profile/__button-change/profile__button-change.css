@@ -1,4 +1,4 @@
-.Profile-Info__button-change {
+.profile__button-change {
   width: 24px;
   height: 24px;
   border: 1px solid #fff;
@@ -9,14 +9,16 @@
   box-sizing: border-box;
 }
 
-.Profile-Info__button-change:hover
+.profile__button-change:hover
 {
   opacity: 0.6;
   cursor: pointer;
 }
 
 @media screen and (max-width: 767px) {
-  .Profile-Info__button-change  {
+  .profile__button-change  {
+    width: 18px;
+    height: 18px;
     margin-top: 0;
   }
 }
