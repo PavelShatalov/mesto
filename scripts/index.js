@@ -14,7 +14,7 @@ let nameInput = document.querySelector('.popup__input[name="name"]');
 let jobInput = document.querySelector('.popup__input[name="profession"]');
 
 // Объявляем переменную для кнопки отправки данных из попапа
-let sendPopupButton = document.querySelector('.popup__container');
+let sendPopupButton = document.querySelector('.popup__form');
 
 // Функция для открытия попапа
 function openPopup() {
@@ -27,7 +27,6 @@ popup.classList.add('popup_opened');
 
 // Добавляем обработчик событий на кнопку открытия попапа
 openPopupButton.addEventListener('click', (e) => {
-e.preventDefault(); // Предотвращаем дефолтное поведение браузера (переход по ссылке)
 openPopup(); // Вызываем функцию для открытия попапа
 });
 

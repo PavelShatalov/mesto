@@ -6,10 +6,9 @@
   /* margin-left: calc((168.75px - 127.5px)/2); */
   margin-right: calc((168.75px - 127.5px)/2);
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 900px) {
   .profile__img-avatar  {
     margin: 0px auto 22.25px auto;
-
   }
 }
 
