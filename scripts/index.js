@@ -1,67 +1,143 @@
-// Объявляем переменную для элемента DOM страницы, представляющего собой попап
-let popup = document.querySelector('.popup');
-
-// Объявляем переменные для кнопок открытия и закрытия попапа
-let openPopupButton = document.querySelector('.profile__button-change');
-let closePopupButton = document.querySelector('.popup__close');
-
-// Объявляем константы для элементов DOM страницы, содержащих информацию о пользователе (имя и профессия)
+// Общие переменные
+const popupChange = document.querySelector('#popupChange');
+const openChangeButton = document.querySelector('.profile__button-change');
+const closeChangePopupButton = document.querySelector('#closeChangePopupButton');
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
+const nameInput = document.querySelector('.popup__input[name="name"]');
+const jobInput = document.querySelector('.popup__input[name="profession"]');
+const sendPopupButton = document.querySelector('#popupChangeForm');
 
-// Объявляем переменные для текстовых полей ввода имени и профессии в попапе
-let nameInput = document.querySelector('.popup__input[name="name"]');
-let jobInput = document.querySelector('.popup__input[name="profession"]');
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
 
-// Объявляем переменную для кнопки отправки данных из попапа
-let sendPopupButton = document.querySelector('.popup__form');
+const elementsContainer = document.querySelector('.elements');
+const popupImg = document.querySelector('#imgPopup');
+const closeImgPopupButton = document.querySelector('#closeImgPopupButton');
+const openPopupAdd = document.querySelector('.profile__button-add');
+const cardNameInput = document.querySelector('.popup__input[name="card-name"]');
+const urlInput = document.querySelector('.popup__input[name="url"]');
+const sendPopupButtonAdd = document.querySelector('#addPopupForm');
+const addPopup = document.querySelector('#addPopup');
+const closeAddPopupButton = document.querySelector('#closeAddPopupButton');
 
-// Функция для открытия попапа
-function openPopup() {
-// Заполняем текстовые поля ввода текущими значениями имени и профессии на странице
-nameInput.value = profileTitle.textContent;
-jobInput.value = profileSubtitle.textContent;
-// Добавляем класс для отображения попапа на странице
-popup.classList.add('popup_opened');
-};
+// Функции для работы с попапами
+// Открыть попап
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
+  }
 
-// Добавляем обработчик событий на кнопку открытия попапа
-openPopupButton.addEventListener('click', (e) => {
-openPopup(); // Вызываем функцию для открытия попапа
-});
+  // Закрыть попап
+  function closePopup(popup) {
+  popup.classList.remove('popup_opened');
+  }
 
-// Функция для закрытия попапа
-function closePopup() {
-// Удаляем класс для скрытия попапа на странице
-popup.classList.remove('popup_opened');
-}
+  // Открыть попап с картинкой
+  function cardPopupOpen(name, link){
+  popupImg.querySelector('.popup__description').textContent = name;
+  popupImg.querySelector('.popup__img').setAttribute('alt', name);
+  popupImg.querySelector('.popup__img').setAttribute('src', link)
+  popupImg.classList.add('popup_opened-img')
+  }
 
-// Добавляем обработчик событий на кнопку закрытия попапа
-closePopupButton.addEventListener('click', () => {
-closePopup(); // Вызываем функцию для закрытия попапа
-});
+  // Закрыть попап с картинкой
+  function closeImgPopup(){
+  popupImg.classList.toggle('popup_opened-img')
+  }
 
-// Функция для отправки данных из попапа и обновления профиля на странице
-function handleFormSubmit (evt) {
-evt.preventDefault(); // Предотвращаем дефолтное поведение браузера (отправку формы)
-// Обновляем значения имени и профессии на странице
-profileTitle.textContent = nameInput.value;
-profileSubtitle.textContent = jobInput.value;
-closePopup(); // Закрываем попап после успешной отправки данных
-}
+  // Обработчик отправки формы редактирования профиля
+  function handleChangeFormSubmit (evt) {
+  evt.preventDefault();
+  profileTitle.textContent = nameInput.value;
+  profileSubtitle.textContent = jobInput.value;
+  closePopup(popupChange);
+  }
 
-// Добавляем обработчик событий на кнопку отправки данных из попапа
-sendPopupButton.addEventListener('submit', handleFormSubmit);
+  // Обработчик отправки формы добавления карточки
+  function handleAddFormSubmit (evt) {
+  evt.preventDefault();
+  addCard(cardNameInput.value, urlInput.value);
+  closePopup(addPopup);
+  }
 
+  // Функция добавления карточки в список
+  function addCard(name, link) {
+  const cardTemplate = document.querySelector('.cardTemplate').content;
+  const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
+  cardElement.querySelector('.card__title').textContent = name;
+  cardElement.querySelector('.card__img').setAttribute('alt', name);
+  cardElement.querySelector('.card__img').setAttribute('src', link);
+  elementsContainer.prepend(cardElement);
 
+  // Обработчик клика на кнопке лайка
+  cardElement.querySelector('.card__button-like').addEventListener('click', function (evt) {
+  evt.target.classList.toggle('card__button-like_active');
+  });
 
-// // Обработчик событий для кнопок "Нравится"
-// let likeAction = document.querySelectorAll('.card__button-like');
-// let like = document.querySelector('.card__img-like');
-// likeAction.forEach((button) => { // Перебираем все кнопки
-// button.addEventListener('click', (e) => { // Для каждой вешаем обработчик событий на клик
-// e.preventDefault(); // Предотвращаем дефолтное поведение браузера
-// like.classList.toggle('card__img-like_active'); // Переключаем активность иконки "Нравится"
-// });
-// });
+  // Обработчик клика на кнопке удаления карточки
+  cardElement.querySelector('.card__button-trash').addEventListener('click', function (evt) {
+  evt.target.closest('.card').remove();
+  });
+
+  // Обработчик клика на картинку карточки
+  cardElement.querySelector('.card__img').addEventListener('click', function (evt) {
+  cardPopupOpen(name, link);
+  });
+  }
+
+  // Обработчики событий
+  openChangeButton.addEventListener('click', () => {
+  nameInput.value = profileTitle.textContent;
+  jobInput.value = profileSubtitle.textContent;
+  openPopup(popupChange);
+  });
+
+  closeChangePopupButton.addEventListener('click', () => {
+  closePopup(popupChange);
+  });
+
+  sendPopupButton.addEventListener('submit', handleChangeFormSubmit);
+
+  openPopupAdd.addEventListener('click', () => {
+  openPopup(addPopup);
+  });
+
+  sendPopupButtonAdd.addEventListener('submit', handleAddFormSubmit);
+
+  closeAddPopupButton.addEventListener('click', () => {
+  closePopup(addPopup);
+  });
+
+  closeImgPopupButton.addEventListener('click', () => {
+  closeImgPopup();
+  });
+
+  // Инициализация карточек
+  initialCards.forEach(item => {
+  addCard(item.name, item.link);
+  });
 

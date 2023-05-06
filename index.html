@@ -32,71 +32,17 @@
         </button>
       </section>
       <section class="elements">
-        <div class="card">
-          <img src="./images/karacajevsk.jpg" alt="Карачаевск Сентинский храм" class="card__img">
-          <div class="card__title-row">
-            <h2 class="card__title">Карачаевск</h2>
-            <button class="card__button-like" type="button">
-
-            </button>
-          </div>
-        </div>
-        <div class="card">
-          <img src="./images/elbrus.jpg" alt="гора Эльбрус" class="card__img">
-          <div class="card__title-row">
-            <h2 class="card__title">Гора Эльбрус</h2>
-            <button class="card__button-like" type="button">
-
-            </button>
-          </div>
-        </div>
-
-        <div class="card">
-          <img src="./images/dombaj.jpg" alt="гора белалакая домбай" class="card__img">
-          <div class="card__title-row">
-            <h2 class="card__title">Домбай</h2>
-            <button class="card__button-like" type="button">
-            </button>
-          </div>
-        </div>
-
-        <div class="card">
-          <img src="./images/elbrus.jpg" alt="гора Эльбру" class="card__img">
-          <div class="card__title-row">
-            <h2 class="card__title">Гора Эльбрус</h2>
-            <button class="card__button-like" type="button">
-            </button>
-          </div>
-        </div>
-
-        <div class="card">
-          <img src="./images/dombaj.jpg" alt="гора белалакая домбай" class="card__img">
-          <div class="card__title-row">
-            <h2 class="card__title">Домбай</h2>
-            <button class="card__button-like" type="button">
-            </button>
-          </div>
-        </div>
-
-        <div class="card">
-          <img src="./images/karacajevsk.jpg" alt="Карачаевск Сентинский храм" class="card__img">
-          <div class="card__title-row">
-            <h2 class="card__title">Карачаево-Ч...</h2>
-            <button class="card__button-like" type="button">
-            </button>
-          </div>
-        </div>
       </section>
     </main>
     <footer class="footer">
       <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
     </footer>
   </div>
-  <div class="popup popup_opened">
+  <div class="popup" id="popupChange">
     <div class="popup__container">
-      <button class="popup__close" type="button">
+      <button class="popup__close" type="button"  id ="closeChangePopupButton">
       </button>
-      <form class="popup__form" name="popup">
+      <form class="popup__form" name="popup" id="popupChangeForm" >
         <h2 class="popup__title">Редактировать профиль</h2>
         <div class="popup__inputs">
           <input type="text" name="name" class="popup__input" value="" >
@@ -104,10 +50,42 @@
         </div>
         <button type="submit" class="popup__submit-send">Сохранить</button>
       </form>
-
     </div>
-
   </div>
+  <div class="popup" id="addPopup">
+    <div class="popup__container">
+      <button class="popup__close" type="button" id ="closeAddPopupButton">
+      </button>
+      <form class="popup__form" name="popup" id="addPopupForm">
+        <h2 class="popup__title">Новое место</h2>
+        <div class="popup__inputs">
+          <input type="text" name="card-name" class="popup__input" value="" placeholder="Название">
+          <input type="text" name="url" class="popup__input" value="" placeholder="Ссылка на картинку">
+        </div>
+        <button type="submit" class="popup__submit-send">Создать</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="popup" id="imgPopup">
+    <div class="popup__img-container">
+      <button class="popup__close" type="button" id ="closeImgPopupButton"></button>
+      <img class="popup__img">
+      <p class="popup__description">#</p>
+    </div>
+  </div>
+
+  <template class="cardTemplate">
+    <div class="card">
+      <button class="card__button-trash" type="button"></button>
+      <img src="" alt="" class="card__img">
+      <div class="card__title-row">
+        <h2 class="card__title"></h2>
+        <button class="card__button-like" type="button">
+        </button>
+      </div>
+    </div>
+  </template>
 <script src="scripts/index.js"></script>
 </body>
 </html>

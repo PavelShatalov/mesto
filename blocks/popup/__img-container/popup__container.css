@@ -1,0 +1,9 @@
+.popup__img-container {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1); /* Центрируем и масштабируем в 0 само окно*/
+  background: rgba(0,0,0,0.9);
+  padding:34px 36px 37px 36px;
+  transition: 0.5s all;
+}
