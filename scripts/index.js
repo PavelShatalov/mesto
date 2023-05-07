@@ -6,7 +6,7 @@ const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
 const nameInput = document.querySelector('.popup__input[name="name"]');
 const jobInput = document.querySelector('.popup__input[name="profession"]');
-const sendPopupButton = document.querySelector('#popupChangeForm');
+const popupChangeForm = document.querySelector('#popupChangeForm');
 const initialCards = [
   {
     name: 'Архыз',
@@ -108,7 +108,7 @@ openChangeButton.addEventListener('click', () => {
 closeChangePopupButton.addEventListener('click', () => {
   closePopup(popupChange);
 });
-sendPopupButton.addEventListener('submit', handleChangeFormSubmit);
+popupChangeForm.addEventListener('submit', handleChangeFormSubmit);
 openPopupAdd.addEventListener('click', () => {
   openPopup(addPopup);
 });
