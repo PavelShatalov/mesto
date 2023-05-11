@@ -128,7 +128,7 @@ popupChangeForm.addEventListener('submit', handleChangeFormSubmit);
 openPopupAdd.addEventListener('click', () => {
   openPopup(addPopup);
   sendPopupAddButton.classList.add('popup__submit-send_inactive')
-  buttonElement.setAttribute('disabled', true)
+  sendPopupAddButton.setAttribute('disabled', true)
 });
 sendPopupAdd.addEventListener('submit', handleAddFormSubmit);
 closeAddPopupButton.addEventListener('click', () => {
