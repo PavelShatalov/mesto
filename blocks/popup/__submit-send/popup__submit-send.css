@@ -16,8 +16,8 @@
   transition: 0.5s all;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 48px;
   padding: 0;
+  border-radius: 2px;
 }
 
 .popup__submit-send:hover {
