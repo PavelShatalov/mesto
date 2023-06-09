@@ -96,17 +96,31 @@ function closeByEscape(evt) {
   }
 }
 
+// // запуск валидации форм
+// enableValidation();
+const formElement = document.querySelector('#popupChangeForm');
+const changeFromValidation = new FormValidator({
+  inputSelector: '.popup__input',
+  buttonElement: '.popup__submit-send',
+  inactiveButtonClass: 'popup__submit-send_inactive',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active'
+}, formElement);
+changeFromValidation.enableValidation();
+
+const formElement2 = document.querySelector('#addPopupForm');
+const addFromValidation = new FormValidator({
+  inputSelector: '.popup__input',
+  buttonElement: '.popup__submit-send',
+  inactiveButtonClass: 'popup__submit-send_inactive',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active'
+}, formElement2);
+addFromValidation.enableValidation();
+
   // Обработчики событий
 openChangeButton.addEventListener('click', () => {
-  const valid = new FormValidator({
-    fieldset: '.popup__inputs',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__submit-send',
-    inactiveButtonClass: 'popup__submit-send_inactive',
-    inputErrorClass: 'popup__input_type_error',
-    inputErrorActiveClass: 'popup__input-error_active'
-  }, '#popupChangeForm');
-  valid.enableValidation();
+  // changeFromValidation.disableButton();
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileSubtitle.textContent;
   openPopup(popupChange);
@@ -117,18 +131,8 @@ closeChangePopupButton.addEventListener('click', () => {
 });
 popupChangeForm.addEventListener('submit', handleChangeFormSubmit);
 openPopupAdd.addEventListener('click', () => {
-  const valid = new FormValidator({
-    fieldset: '.popup__inputs',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__submit-send',
-    inactiveButtonClass: 'popup__submit-send_inactive',
-    inputErrorClass: 'popup__input_type_error',
-    inputErrorActiveClass: 'popup__input-error_active'
-  }, '#addPopupForm');
-  valid.enableValidation();
+  addFromValidation.disableButton();
   openPopup(addPopup);
-  sendPopupAddButton.classList.add('popup__submit-send_inactive')
-  sendPopupAddButton.setAttribute('disabled', true)
 });
 sendPopupAdd.addEventListener('submit', handleAddFormSubmit);
 closeAddPopupButton.addEventListener('click', () => {
@@ -145,11 +149,11 @@ document.addEventListener('click', (evt) => { // Вешаем обработчи
   });
 });
 
-// Инициализация карточек // fixed
+// Инициализация карточек
 initialCards.forEach(item => {
   const card = new Card(item, '.cardTemplate');
   const cardElement = card.generateCard();
-  elementsContainer.append(cardElement); // fixed
+  elementsContainer.append(cardElement);
 });
-// // запуск валидации форм
-// enableValidation();
+
+
