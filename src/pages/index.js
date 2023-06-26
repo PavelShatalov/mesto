@@ -1,11 +1,11 @@
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
 // import Popup from './Popup.js';
-import PopupWithForm from './PopupWithForm.js';
-import PopupWithImage from './PopupWithImage.js';
-import Section from './Section.js';
-import UserInfo from './UserInfo.js';
-import '../pages/index.css';
+import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import Section from '../components/Section.js';
+import UserInfo from '../components/UserInfo.js';
+import './index.css';
 
 const initialCards = [
   {
@@ -35,32 +35,32 @@ const initialCards = [
 ];
 
 // запуск валидации форм
-const changeFromValidation = new FormValidator({
+const selectors = {
   inputSelector: '.popup__input',
   buttonElement: '.popup__submit-send',
   inactiveButtonClass: 'popup__submit-send_inactive',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error_active'
-}, document.querySelector('#popupChangeForm'));
+};
+const changeFromValidation = new FormValidator(selectors, document.querySelector('#popupChangeForm'));
 changeFromValidation.enableValidation();
 
-const addFromValidation = new FormValidator({
-  inputSelector: '.popup__input',
-  buttonElement: '.popup__submit-send',
-  inactiveButtonClass: 'popup__submit-send_inactive',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_active'
-}, document.querySelector('#addPopupForm'));
+const addFromValidation = new FormValidator(selectors, document.querySelector('#addPopupForm'));
 addFromValidation.enableValidation();
 
 // Инициализация карточек
-const cardsSection = new Section({items: initialCards, renderer: item => {
+function createCardInstance(item){
   const card = new Card(item, '.cardTemplate',
   ( name, link ) => {
-  const popupWithImage = new PopupWithImage('#imgPopup');//popupImg
   popupWithImage.open(name,link);
-  popupWithImage.setEventListeners()});
+  });
+  return card;
+}
 
+const popupWithImage = new PopupWithImage('#imgPopup');//popupImg
+popupWithImage.setEventListeners();
+const cardsSection = new Section({items: initialCards, renderer: item => {
+  const card = createCardInstance(item);
   const cardElement = card.generateCard();
   cardsSection.addItem( cardElement,true);
 }},'.elements')
@@ -69,12 +69,7 @@ cardsSection.renderItems();
 //работа с попапом
 const openAddButton = document.querySelector('.profile__button-add');
 const popupWithFormAdd = new PopupWithForm('#addPopup', (data) => {
-  const card = new Card({ name: data['card-name'], link: data['url'] }, '.cardTemplate',
-    (name, link) => {
-      const popupWithImage = new PopupWithImage('#imgPopup');
-      popupWithImage.open(name, link);
-      popupWithImage.setEventListeners();
-    });
+  const card = createCardInstance({ name: data['card-name'], link: data['url'] })
   const cardElement = card.generateCard();
   cardsSection.addItem(cardElement, false);
   addFromValidation.disableButton();

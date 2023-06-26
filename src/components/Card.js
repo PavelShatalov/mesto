@@ -31,7 +31,8 @@ export default class Card {
   }
 
   _handleDeleteButtonClick(evt) {
-    evt.target.closest('.card').remove();
+    this._element.remove();
+    this._element = null;
   }
 
 _handleImageClick() {
