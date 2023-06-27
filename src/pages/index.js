@@ -54,14 +54,15 @@ function createCardInstance(item){
   ( name, link ) => {
   popupWithImage.open(name,link);
   });
-  return card;
+  const cardElement = card.generateCard();
+  return cardElement;
 }
 
 const popupWithImage = new PopupWithImage('#imgPopup');//popupImg
 popupWithImage.setEventListeners();
 const cardsSection = new Section({items: initialCards, renderer: item => {
-  const card = createCardInstance(item);
-  const cardElement = card.generateCard();
+  const cardElement = createCardInstance(item);
+
   cardsSection.addItem( cardElement,true);
 }},'.elements')
 cardsSection.renderItems();
@@ -69,8 +70,7 @@ cardsSection.renderItems();
 //работа с попапом
 const openAddButton = document.querySelector('.profile__button-add');
 const popupWithFormAdd = new PopupWithForm('#addPopup', (data) => {
-  const card = createCardInstance({ name: data['card-name'], link: data['url'] })
-  const cardElement = card.generateCard();
+  const cardElement = createCardInstance({ name: data['card-name'], link: data['url'] });
   cardsSection.addItem(cardElement, false);
   addFromValidation.disableButton();
   popupWithFormAdd.close();
@@ -90,10 +90,12 @@ const popupWithFormChange = new PopupWithForm('#popupChange',(data)=>{
   popupWithFormChange.close();
 });
 
+const popupName = document.querySelector('.popup__input[name="name"]');
+const popupProfession = document.querySelector('.popup__input[name="profession"]');
 openChangeButton.addEventListener('click',()=>{
-  const data =userInfo.getUserInfo();
-  document.querySelector('.popup__input[name="name"]').value = data.name;
-  document.querySelector('.popup__input[name="profession"]').value = data.description;
+  const data = userInfo.getUserInfo();
+  popupName.value = data.name;
+  popupProfession.value = data.description;
   popupWithFormChange.open();
 });
 popupWithFormChange.setEventListeners();
