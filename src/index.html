@@ -20,7 +20,7 @@
         <div class="profile__description">
           <!-- <img src= alt="фото жака кусто" class="profile__img-avatar"> -->
           <div class="profile__avatar">
-            <img id ="avatar" class="profile__img-avatar" src=""  alt="фото пользователя">
+            <img id ="avatar" class="profile__img-avatar" src="#"  alt="фото пользователя">
             <button class="profile__avatar-button" type="button" id="changeAvatarButton"></button>
           </div>
           <div>
@@ -96,12 +96,11 @@
 
   <div class="popup" id="confirmationPopup">
     <div class="popup__container">
-      <button class="popup__close" type="button" id ="closeAddPopupButton">
+      <button class="popup__close" type="button">
       </button>
       <form class="popup__form" name="popup" id="confirmationPopupForm" novalidate>
         <h2 class="popup__title popup__title_confirm">Вы уверены?</h2>
           <button type="submit" class="popup__submit-send" id="confirmationPopupSubmit">да</button>
-        </fieldset>
       </form>
     </div>
   </div>
@@ -114,10 +113,10 @@
         <h2 class="popup__title">Обновить аватар</h2>
         <fieldset class="popup__inputs">
           <label class="popup__label">
-            <input type="url" id="url-input" name="url" class="popup__input" value="" placeholder="Ссылка на картинку" required>
+            <input type="url"  name="url" class="popup__input" value="" placeholder="Ссылка на картинку" required>
             <span class="popup__input-error url-input-error"></span>
           </label>
-          <button type="submit" class="popup__submit-send" id="addSubmit">Сохранить</button>
+          <button type="submit" class="popup__submit-send" >Сохранить</button>
         </fieldset>
       </form>
     </div>
