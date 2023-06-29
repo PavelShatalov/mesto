@@ -35,18 +35,13 @@ addFromValidation.enableValidation();
 
 const popupWithImage = new PopupWithImage('#imgPopup');//popupImg
 popupWithImage.setEventListeners();
-const changeAvatarFromValidation = new FormValidator(selectors,document.querySelector('#changeAvatarForm') )
+const changeAvatarFromValidation = new FormValidator(selectors, document.querySelector('#changeAvatarForm') )
 changeAvatarFromValidation.enableValidation();
 
 //инициализация
 
 // информация о пользователе
-const userInfo = new UserInfo({ nameSelector: '.profile__title', descriptionSelector: '.profile__subtitle', avatarElement:'#avatar'});
-api.getUserInfo().then((data)=>{
-  userInfo.setUserInfo({name:data.name,description:data.about,avatarImg:data.avatar})
-}).catch((err) => {
-  console.log(err); // выведем ошибку в консоль
-});
+
 
 // карточки
 function createCardInstance(item){
@@ -67,16 +62,27 @@ function createCardInstance(item){
   const cardElement = card.generateCard();
   return cardElement;
 }
+
+const userInfo = new UserInfo({ nameSelector: '.profile__title', descriptionSelector: '.profile__subtitle', avatarElement: '#avatar' });
 let cardsSection;
-api.getInitialCards().then((data)=>{
-  cardsSection = new Section({items: data, renderer: item => {
-    const cardElement = createCardInstance(item);
-    cardsSection.addItem( cardElement,true);
-  }},'.elements')
-  cardsSection.renderItems();
-}).catch((err) => {
-  console.log(err); // выведем ошибку в консоль
-});
+
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userData, cardsData]) => {
+    userInfo.setUserInfo({ name: userData.name, description: userData.about, avatarImg: userData.avatar });
+
+    cardsSection = new Section({
+      items: cardsData,
+      renderer: (item) => {
+        const cardElement = createCardInstance(item);
+        cardsSection.addItem(cardElement, true);
+      }
+    }, '.elements');
+
+    cardsSection.renderItems();
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 // слушатели
 
@@ -98,13 +104,11 @@ const popupWithFormChange = new PopupWithForm('#popupChange',(data)=>{
 const popupName = document.querySelector('.popup__input[name="name"]');
 const popupProfession = document.querySelector('.popup__input[name="profession"]');
 openChangeButton.addEventListener('click',()=>{
-  api.getUserInfo().then((data)=>{
-    popupName.value = data.name;
-    popupProfession.value = data.description;
-    popupWithFormChange.open();
-  }).catch((err) => {
-    console.log(err); // выведем ошибку в консоль
-  });
+  const data = userInfo.getUserInfo();
+  popupName.value = data.name;
+  popupProfession.value = data.description;
+  popupWithFormChange.open();
+
 });
 popupWithFormChange.setEventListeners();
 
@@ -127,6 +131,7 @@ const popupWithFormAdd = new PopupWithForm('#addPopup', (data) => {
 popupWithFormAdd.setEventListeners();
 
 openAddButton.addEventListener('click', () => {
+  addFromValidation.disableButton();
   popupWithFormAdd.open();
 });
 
@@ -146,6 +151,7 @@ popupWithConfirmation.setEventListeners();
 const changeAvatarButton = document.querySelector('#changeAvatarButton')
 
 changeAvatarButton.addEventListener('click',(evt)=>{
+  changeAvatarFromValidation.disableButton();
   popupWithFormAvatar.open();
 })
 
