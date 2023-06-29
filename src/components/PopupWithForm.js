@@ -4,7 +4,7 @@ export default class PopupWithForm extends Popup {
     super(popupSelector);
     this._formElement = this._popup.querySelector('.popup__form');
     this._submitCallback = submitCallback;
-    // this._submitButton = this._formElement.querySelector('.popup__submit-send')
+    this._submitButton = this._formElement.querySelector('.popup__submit-send')
   }
 
   _getInputValues() {
@@ -28,5 +28,9 @@ export default class PopupWithForm extends Popup {
     super.close();
     // this._submitButton.setAttribute('disabled', true);
     this._formElement.reset();
+  }
+
+  actionMessage(message){
+    this._submitButton.textContent = message
   }
 }

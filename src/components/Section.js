@@ -21,5 +21,9 @@ export default class Section {
       this._renderer(item);
     });
   }
+
+  // setItems(items) {
+  //   this._renderedItems = items;
+  // }
 }
 

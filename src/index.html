@@ -18,14 +18,18 @@
     <main>
       <section class="profile">
         <div class="profile__description">
-          <img src="<%=require('./images/profileAvatar.jpg')%>" alt="фото жака кусто" class="profile__img-avatar">
+          <!-- <img src= alt="фото жака кусто" class="profile__img-avatar"> -->
+          <div class="profile__avatar">
+            <img id ="avatar" class="profile__img-avatar" src=""  alt="фото пользователя">
+            <button class="profile__avatar-button" type="button" id="changeAvatarButton"></button>
+          </div>
           <div>
             <div class="profile__title-row">
-              <h1 class="profile__title">Жак-Ив Кусто</h1>
+              <h1 class="profile__title"></h1>
               <button class="profile__button-change" type="button">
               </button>
             </div>
-            <p class="profile__subtitle">Исследователь океана</p>
+            <p class="profile__subtitle"></p>
           </div>
         </div>
         <button class="profile__button-add" type="button">
@@ -90,14 +94,46 @@
     </div>
   </div>
 
+  <div class="popup" id="confirmationPopup">
+    <div class="popup__container">
+      <button class="popup__close" type="button" id ="closeAddPopupButton">
+      </button>
+      <form class="popup__form" name="popup" id="confirmationPopupForm" novalidate>
+        <h2 class="popup__title popup__title_confirm">Вы уверены?</h2>
+          <button type="submit" class="popup__submit-send" id="confirmationPopupSubmit">да</button>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+
+  <div class="popup" id="changeAvatarPopup">
+    <div class="popup__container">
+      <button class="popup__close" type="button" id ="closeChangeAvatarPopupButton">
+      </button>
+      <form class="popup__form" name="popup" id="changeAvatarForm" novalidate>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <fieldset class="popup__inputs">
+          <label class="popup__label">
+            <input type="url" id="url-input" name="url" class="popup__input" value="" placeholder="Ссылка на картинку" required>
+            <span class="popup__input-error url-input-error"></span>
+          </label>
+          <button type="submit" class="popup__submit-send" id="addSubmit">Сохранить</button>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+
   <template class="cardTemplate">
     <div class="card">
       <button class="card__button-trash" type="button"></button>
       <img class="card__img">
       <div class="card__title-row">
         <h2 class="card__title"></h2>
-        <button class="card__button-like" type="button">
-        </button>
+        <div class="card__info">
+          <button class="card__button-like" type="button">
+          </button>
+          <p class="card__like-count">12</p>
+        </div>
       </div>
     </div>
   </template>
